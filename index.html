@@ -1,7 +1,613 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kian Shaker - X-ray Scientist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <style>
+        /* ==== COLOR VARIABLES - CHANGE THESE TO UPDATE THE ENTIRE SITE'S COLOR SCHEME ==== */
+        :root {
+            --main-color: #1c75bc;
+            --main-color-rgb: 28, 117, 188;
+        }
+        /* ============================================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fafafa;
+            color: #333;
+            height: 100vh;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .container {
+            height: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 2rem;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--main-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section {
+            background: white;
+            border: 2px solid var(--main-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            font-size: 1.3rem;
+            color: var(--main-color);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .brief-description {
+            flex: 1;
+        }
+
+        .brief-description p {
+            line-height: 1.6;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .contact {
+            flex: 0 0 auto;
+        }
+
+        .contact p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .contact a {
+            color: var(--main-color);
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        .links {
+            flex: 0 0 auto;
+        }
+
+        .icon-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f8f9ff;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .icon-link:hover {
+            background: var(--main-color);
+            border-color: var(--main-color);
+            transform: translateY(-2px);
+        }
+
+        .icon-link:hover svg {
+            fill: white;
+        }
+
+        .icon-link svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--main-color);
+            transition: fill 0.2s ease;
+        }
+
+        /* Arrow Animation Styles */
+        .flying-arrow {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            width: 80px;
+            height: 35px;
+        }
+
+        .flying-arrow svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(57, 181, 74, 0.3));
+        }
+
+        @keyframes arrowFade {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes arrowShrink {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        .flying-arrow.animate {
+            animation: arrowFade 0.8s ease-out forwards;
+        }
+
+        .flying-arrow.animate svg {
+            animation: arrowShrink 0.8s ease-out forwards;
+        }
+
+        /* Interaction Atom Animation */
+        .interaction-atom {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            width: 42px;
+            height: 42px;
+        }
+
+        .interaction-atom svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes atomAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            30% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        @keyframes electronOrbit1 {
+            0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+        }
+
+        @keyframes electronOrbit2 {
+            0% { transform: rotate(120deg) translateX(20px) rotate(-120deg); }
+            100% { transform: rotate(480deg) translateX(20px) rotate(-480deg); }
+        }
+
+        @keyframes electronOrbit3 {
+            0% { transform: rotate(240deg) translateX(20px) rotate(-240deg); }
+            100% { transform: rotate(600deg) translateX(20px) rotate(-600deg); }
+        }
+
+        .interaction-atom.animate {
+            animation: atomAppear 0.42s ease-out forwards;
+        }
+
+        .interaction-atom.animate .electron-1 {
+            transform-origin: 30px 30px;
+            animation: electronOrbit1 0.42s linear forwards;
+        }
+
+        .interaction-atom.animate .electron-2 {
+            transform-origin: 30px 30px;
+            animation: electronOrbit2 0.42s linear forwards;
+        }
+
+        .interaction-atom.animate .electron-3 {
+            transform-origin: 30px 30px;
+            animation: electronOrbit3 0.42s linear forwards;
+        }
+
+        /* Shaker Text Animation */
+        .shaker-text {
+            font-weight: 900 !important; /* Extra bold for "Shaker" - override Tailwind */
+            display: inline-block;
+            animation: slowShakeRotation 4s ease-in-out infinite;
+            transform-origin: center bottom; /* Anchor point like a flame base */
+            color: var(--main-color) !important;
+        }
+
+        h1 .shaker-text {
+            font-weight: 900 !important; /* Higher specificity */
+            color: var(--main-color) !important;
+        }
+
+        @keyframes slowShakeRotation {
+            0% { 
+                transform: rotate(-3deg);
+            }
+            50% { 
+                transform: rotate(3deg);
+            }
+            100% { 
+                transform: rotate(-3deg);
+            }
+        }
+
+        .projects {
+            flex: 1;
+        }
+
+        .project-list {
+            list-style: none;
+        }
+
+        .project-list li {
+            margin-bottom: 0.8rem;
+            padding: 0.5rem;
+            background: #f8f9ff;
+            border-radius: 4px;
+            border-left: 3px solid var(--main-color);
+        }
+
+        .project-list li:hover {
+            background: #f0f2ff;
+        }
+
+        .publications {
+            flex: 1;
+        }
+
+        .publications-content {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .publications-content a {
+            color: var(--main-color);
+            text-decoration: none;
+        }
+
+        .publications-content a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                overflow-y: auto;
+                height: auto;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-height: 600px) {
+            body {
+                overflow-y: auto;
+                height: auto;
+            }
+            
+            .container {
+                height: auto;
+            }
+        }
+    </style>
+</head>
 <body>
-<h1>X</h1>
-<p></p>
+    <div class="container">
+        <div class="header">
+            <h1>Kian <span class="shaker-text" style="color: var(--main-color);">Shaker</span></h1>
+        </div>
+
+        <div class="left-column">
+            <div class="section brief-description">
+                <h2><span class="shaker-text" style="color: var(--main-color);">Shaking</span> the habitual</h2>
+                <p>
+
+                    Cultivating the <a href="https://slimemoldtimemold.com/2022/02/10/the-scientific-virtues/" target="_blank">scientific virtues</a><br>
+
+                </p>
+            </div>
+
+            <div class="section contact">
+                <h2>Contact</h2>
+                <p>
+                    Email: <a href="mailto:kiansd[at]kth.se">kiansd[at]kth.se</a><br>
+          
+                    Work adress: Roslagstullsbacken 21, 114 21 Stockholm, Sweden
+                </p>
+            </div>
+
+            <div class="section links">
+                <h2>Links</h2>
+                <div class="icon-links">
+                    <a href="https://scholar.google.com/citations?user=Kihb5S0AAAAJ&hl=en&oi=ao" target="_blank" class="icon-link" title="Google Scholar">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 24C5.37 24 0 18.63 0 12S5.37 0 12 0s12 5.37 12 12-5.37 12-12 12zM12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm4.5 11.5c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5c1.4 0 2.64.58 3.54 1.5l-1.44 1.38c-.55-.52-1.28-.83-2.1-.83-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3h-3v-2h5.5c.28 0 .5.22.5.5v.5z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/xrayshaker" target="_blank" class="icon-link" title="GitHub">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://orcid.org/0000-0002-7674-6437" target="_blank" class="icon-link" title="ORCID">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.725-1.444 3.725-3.722 0-2.016-1.313-3.722-3.706-3.722h-2.316z"/>
+                        </svg>
+                    </a>
+                    <a href="https://se.linkedin.com/in/kian-shaker-90a780113" target="_blank" class="icon-link" title="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19.586 0H4.414C1.978 0 0 1.978 0 4.414v15.172C0 22.022 1.978 24 4.414 24h15.172C22.022 24 24 22.022 24 19.586V4.414C24 1.978 22.022 0 19.586 0zM8 19H5v-8h3v8zM6.5 9.75A1.75 1.75 0 1 1 8.3 8a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19a.66.66 0 0 0 0 .14V19h-3v-8h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.kth.se/profile/kianshaker" target="_blank" class="icon-link" title="KTH Profile">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6L23 9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="section projects">
+                <h2><span class="shaker-text" style="color: var(--main-color);">Open</span> X-ray technologies</h2>
+                <ul class="project-list">
+                    <li><strong><a href="www.opendosimeter.org">OpenDosimeter</a></strong> - Low-cost open hardware real-time personal dosimeter</li>
+                    <li><strong>OpenRadiography</strong> - To be announced soon</li>
+                    <li><strong>OpenXRF</strong> - To be announced soon</li>
+                </ul>
+            </div>
+
+            <div class="section publications">
+                <h2>Publications</h2>
+                <div class="publications-content">
+                    
+                    <p><a href="https://scholar.google.com/citations?user=Kihb5S0AAAAJ&hl=en&oi=ao" target="_blank">View all publications →</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Arrow animation functionality
+        function createArrow() {
+            const arrow = document.createElement('div');
+            arrow.className = 'flying-arrow';
+            arrow.innerHTML = `
+                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 134.51 27.73">
+                    <polygon points="133.56 11.94 119.45 15.44 105.33 18.94 105.58 3.57 119.57 7.75 133.56 11.94" style="fill: #39b54a; stroke: #39b54a; stroke-miterlimit: 10; stroke-width: .5px;"/>
+                    <path d="M106.75,11.13c-2.03-.79-5.16-1.55-8.6-.27-7.93,2.95-10.34,14.08-14.1,12.87-1.14-.37-4.52-4.27-7.33-14.7-3.83-14.2-8.57,5.94-13.03,15.57-4.46,9.63-7.88-19.75-11.99-23.32-4.11-3.57-9.17,28.79-13.28,25.17-4.1-3.62-7.52-32.99-11.99-23.32-4.46,9.67-9.2,29.79-13.03,15.56C11.06,9.98,8.65,3.86,6.08,3.99c-1.15.06-2.81,1.49-5.12,8.7" style="fill: rgba(57, 181, 74, .5); stroke: #39b54a; stroke-miterlimit: 10; stroke-width: 2px;"/>
+                </svg>
+            `;
+            return arrow;
+        }
+
+        function createInteractionAtom() {
+            const atom = document.createElement('div');
+            atom.className = 'interaction-atom';
+            atom.innerHTML = `
+                <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Nucleus -->
+                    <circle cx="30" cy="30" r="4" fill="#39b54a" opacity="0.9"/>
+                    
+                    <!-- Electron orbitals (larger and more visible) -->
+                    <ellipse cx="30" cy="30" rx="20" ry="10" 
+                             fill="none" stroke="#39b54a" stroke-width="1.5" opacity="0.7"/>
+                    <ellipse cx="30" cy="30" rx="10" ry="20" 
+                             fill="none" stroke="#39b54a" stroke-width="1.5" opacity="0.7"/>
+                    <ellipse cx="30" cy="30" rx="25" ry="12" 
+                             fill="none" stroke="#39b54a" stroke-width="1" opacity="0.5"
+                             transform="rotate(45 30 30)"/>
+                    
+                    <!-- Electrons (larger and more visible) -->
+                    <circle cx="50" cy="30" r="2" fill="#39b54a" class="electron-1"/>
+                    <circle cx="30" cy="10" r="2" fill="#39b54a" class="electron-2"/>
+                    <circle cx="15" cy="45" r="2" fill="#39b54a" class="electron-3"/>
+                </svg>
+            `;
+            return atom;
+        }
+
+        function getRandomEdgePosition() {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const edge = Math.floor(Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
+            
+            switch(edge) {
+                case 0: // top
+                    return { x: Math.random() * viewportWidth, y: -30 };
+                case 1: // right
+                    return { x: viewportWidth + 30, y: Math.random() * viewportHeight };
+                case 2: // bottom
+                    return { x: Math.random() * viewportWidth, y: viewportHeight + 30 };
+                case 3: // left
+                    return { x: -30, y: Math.random() * viewportHeight };
+                default:
+                    return { x: 0, y: 0 };
+            }
+        }
+
+        function calculateArrowAngle(startX, startY, endX, endY) {
+            const dx = endX - startX;
+            const dy = endY - startY;
+            return Math.atan2(dy, dx) * 180 / Math.PI;
+        }
+
+        function animateArrow(startPos, endPos) {
+            const arrow = createArrow();
+            document.body.appendChild(arrow);
+            
+            // Calculate initial angle (approach to interaction point)
+            const initialAngle = calculateArrowAngle(startPos.x, startPos.y, endPos.x, endPos.y);
+            
+            // Calculate precise arrowhead offset based on your SVG
+            // Your SVG: viewBox="0 0 134.51 27.73", arrowhead tip at x=133.56 (from polygon)
+            // Arrow width: 80px, so tip offset = (133.56/134.51) * 80 = 79.44px from left edge
+            // From center: 79.44 - 40 = 39.44px, so offset ratio = 39.44/80 = 0.493
+            const arrowLength = 80;
+            const arrowheadOffset = arrowLength * 0.493; // Precise tip position from polygon coordinates
+            const offsetX = Math.cos(initialAngle * Math.PI / 180) * arrowheadOffset;
+            const offsetY = Math.sin(initialAngle * Math.PI / 180) * arrowheadOffset;
+            
+            // Adjust target so arrowhead tip hits exact click position
+            const adjustedEndX = endPos.x - offsetX;
+            const adjustedEndY = endPos.y - offsetY;
+            
+            // Set initial position and rotation
+            arrow.style.left = startPos.x + 'px';
+            arrow.style.top = startPos.y + 'px';
+            arrow.style.transform = `rotate(${initialAngle}deg)`;
+            
+            // Calculate distance and duration to interaction point
+            const approachDistance = Math.sqrt(Math.pow(adjustedEndX - startPos.x, 2) + Math.pow(adjustedEndY - startPos.y, 2));
+            const approachDuration = Math.min(800, Math.max(300, approachDistance * 1.0));
+            
+            // Phase 1: Animate to interaction point (arrowhead tip reaches exact click position)
+            arrow.style.transition = `left ${approachDuration}ms linear, top ${approachDuration}ms linear`;
+            
+            // Force reflow
+            arrow.offsetHeight;
+            
+            // Move to adjusted position so arrowhead tip hits click position
+            arrow.style.left = adjustedEndX + 'px';
+            arrow.style.top = adjustedEndY + 'px';
+            
+            // Phase 2: Scatter at interaction point
+            setTimeout(() => {
+                // Create interaction atom at exact click position
+                const atom = createInteractionAtom();
+                document.body.appendChild(atom);
+                atom.style.left = (endPos.x - 21) + 'px'; // Center the 42px atom
+                atom.style.top = (endPos.y - 21) + 'px';
+                
+                // Add random rotation to the entire atom (apply to SVG to preserve throughout animation)
+                const randomRotation = Math.random() * 360;
+                const atomSvg = atom.querySelector('svg');
+                atomSvg.style.transform = `rotate(${randomRotation}deg)`;
+                
+                // Trigger atom animation
+                setTimeout(() => {
+                    atom.classList.add('animate');
+                    
+                    // Remove atom after animation (30% faster)
+                    setTimeout(() => {
+                        if (atom.parentNode) {
+                            atom.parentNode.removeChild(atom);
+                        }
+                    }, 420); // 0.6s * 0.7 = 0.42s = 420ms
+                }, 10);
+                
+                // Generate random scatter angle (0-360 degrees)
+                const scatterAngle = Math.random() * 360;
+                
+                // Calculate scattered endpoint (200px in random direction from click position)
+                const scatterDistance = 200;
+                const scatteredEndX = endPos.x + Math.cos(scatterAngle * Math.PI / 180) * scatterDistance;
+                const scatteredEndY = endPos.y + Math.sin(scatterAngle * Math.PI / 180) * scatterDistance;
+                
+                // Update rotation for scattered direction
+                arrow.style.transform = `rotate(${scatterAngle}deg)`;
+                
+                // Set up scattered trajectory animation
+                const scatterDuration = 600;
+                arrow.style.transition = `left ${scatterDuration}ms linear, top ${scatterDuration}ms linear, transform 100ms ease-out`;
+                
+                // Start scattering movement from current position
+                arrow.style.left = scatteredEndX + 'px';
+                arrow.style.top = scatteredEndY + 'px';
+                
+                // Start fade and shrink animation immediately after scattering begins
+                setTimeout(() => {
+                    arrow.classList.add('animate');
+                }, 50);
+                
+                // Remove arrow after scattered trajectory completes
+                setTimeout(() => {
+                    if (arrow.parentNode) {
+                        arrow.parentNode.removeChild(arrow);
+                    }
+                }, scatterDuration + 100);
+                
+            }, approachDuration);
+        }
+
+        // Add click event listener
+        document.addEventListener('click', function(event) {
+            // Don't trigger on link clicks
+            if (event.target.tagName === 'A' || event.target.closest('a')) {
+                return;
+            }
+            
+            const clickPos = { x: event.clientX, y: event.clientY };
+            const startPos = getRandomEdgePosition();
+            
+            animateArrow(startPos, clickPos);
+        });
+
+        // Prevent text selection during rapid clicking
+        document.addEventListener('selectstart', function(event) {
+            if (event.detail && event.detail > 1) {
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
