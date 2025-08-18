@@ -22,6 +22,7 @@
             --main-color-rgb: 28, 117, 188;
             --main-color-green: #39b54a;
             --main-color-gray: #888;
+            --main-color-red: #dc3545;
         }
         /* ============================================================================= */
 
@@ -330,6 +331,11 @@
             border-radius: 4px;
         }
 
+        .project-list .project-link.red-project:hover {
+            background: rgba(220, 53, 69, 0.1);
+            border-radius: 4px;
+        }
+
         .project-link, .project-item {
             display: flex;
             align-items: center;
@@ -342,6 +348,10 @@
 
         .project-link .project-content {
             color: var(--main-color-green);
+        }
+
+        .project-link.red-project .project-content {
+            color: var(--main-color-red);
         }
 
         .project-list ag {
@@ -545,7 +555,7 @@
 
                     In my <a href="https://www.diva-portal.org/smash/get/diva2:1646647/FULLTEXT01.pdf" target="_blank">PhD thesis →</a> (2022, KTH Royal Institute of Technology) I used experimental & computational approaches to explore unconventional contrast mechanisms for X-ray imaging in a preclinical setting. I then did my postdoc at the <a href="https://med.stanford.edu/rsl.html" target="_blank">Radiological Sciences Laboratory →</a> (2022-2024, Stanford University) funded by a <a href="https://kaw.wallenberg.org/en/scholarship-programs-20212022" target="_blank">KAW Postdoctoral Scholarship →</a>. Here I got interested in the intersections of clinical radiology, global health, and open hardware. Now I am back <a href="https://www.kth.se/profile/kiansd?l=en" target="_blank">at KTH →</a> in Stockholm, focusing on democratizing X-ray technologies to adress global health challenges <br><br>
                     
-                    You can find my <a href="https://drive.google.com/file/d/17dNtor6kJRgb_J3uOZOfbR4CvDzbdEcJyZf_BMpM_5s/preview" 
+                    You can find my <a href="https://docs.google.com/viewer?url=https://docs.google.com/document/d/17dNtor6kJRgb_J3uOZOfbR4CvDzbdEcJyZf_BMpM_5s/export?format=pdf" 
    target="_blank">CV here →</a> and publications on <a href="https://scholar.google.com/citations?user=Kihb5S0AAAAJ&hl=en&oi=ao" target="_blank">Google Scholar →</a><br><br>
 
                     On this page you can find my ongoing work on open X-ray technologies and exploration of unconventional contrast mechanisms in X-ray imaging
@@ -600,7 +610,6 @@
                 <div class="publications-content" style="margin-bottom: 1rem;">
                     <p>Democratizing solutions to global challenges</p>
                 </div>
-
                 <ul class="project-list">
                     <li>
                         <a href="https://opendosimeter.org/" class="project-link">
@@ -612,6 +621,17 @@
                             </svg>
                             <div class="project-content">
                                 OpenDosimeter → Released
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.openxrf.org/" class="project-link red-project">
+                            <svg class="project-icon" viewBox="0 0 1277.29 1335.52" xmlns="http://www.w3.org/2000/svg">
+                                <polygon fill="#dc3545" stroke="#dc3545" stroke-miterlimit="10" stroke-width="50" points="1239.24 39.25 1184.97 140.52 1130.65 241.74 1039.41 154.49 1139.31 96.86 1239.24 39.25"/>
+                                <path fill="rgba(220, 54, 69, .5)" stroke="#dc3545" stroke-miterlimit="10" stroke-width="80" d="M1078.06,202.64c-28.05,13.24-66.52,38.22-85.75,87.05-44.3,112.47,53.45,249.86,4,276.93-14.98,8.2-89.99,4.14-230.43-71.6-191.26-103.15-17.97,149.3,43.69,292.84,61.63,143.6-290.59-116.67-368.98-109.7-78.36,6.93,224.59,385.88,145.59,392.29-78.92,6.36-431.02-253.8-368.93-109.75,62.13,144.01,235.21,396.25,43.68,292.84-117.23-63.33-207-99.88-230.45-71.69-10.49,12.61-10.88,44.4,45.15,141.13"/>
+                            </svg>
+                            <div class="project-content">
+                                OpenXRF → Coming soon
                             </div>
                         </a>
                     </li>
@@ -630,18 +650,6 @@
                             </svg>
                             <div class="project-content">
                                 <span class="upcoming"> OpenRadiography - Upcoming</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="project-item">
-                            <svg class="project-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="3" fill="rgba(136, 136, 136, .3)" stroke="var(--main-color-gray)" stroke-width="1.5"/>
-                                <path d="M12 1v6m0 10v6m11-7h-6m-10 0H1" stroke="var(--main-color-gray)" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="m19.07 4.93-4.24 4.24m0 5.66 4.24 4.24M4.93 4.93l4.24 4.24m0 5.66-4.24 4.24" stroke="var(--main-color-gray)" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                            <div class="project-content">
-                                <span class="upcoming"> OpenXRF - Upcoming</span>
                             </div>
                         </div>
                     </li>
