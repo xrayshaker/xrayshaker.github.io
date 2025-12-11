@@ -8,8 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 
-        <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
@@ -338,6 +337,12 @@
             border-radius: 4px;
         }
 
+        /* New Blue Project Hover Style */
+        .project-list .project-link.blue-project:hover {
+            background: rgba(28, 117, 188, 0.1);
+            border-radius: 4px;
+        }
+
         .project-link, .project-item {
             display: flex;
             align-items: center;
@@ -354,6 +359,11 @@
 
         .project-link.red-project .project-content {
             color: var(--main-color-red);
+        }
+
+        /* New Blue Project Text Color */
+        .project-link.blue-project .project-content {
+            color: var(--main-color);
         }
 
         .project-list ag {
@@ -556,7 +566,7 @@
                     I am an X-ray physicist curious about global health problems. I encourage my students, and try myself, to cultivate the <a href="https://slimemoldtimemold.com/2022/02/10/the-scientific-virtues/" target="_blank">7 scientific virtues →</a> <br><br>
 
                     In my <a href="https://www.diva-portal.org/smash/get/diva2:1646647/FULLTEXT01.pdf" target="_blank">PhD thesis →</a> (2022, KTH Royal Institute of Technology) I used experimental & computational approaches to explore unconventional contrast mechanisms for X-ray imaging in a preclinical setting. I then did my postdoc at the <a href="https://med.stanford.edu/rsl.html" target="_blank">Radiological Sciences Laboratory →</a> (2022-2024, Stanford University) funded by a <a href="https://kaw.wallenberg.org/en/scholarship-programs-20212022" target="_blank">KAW Postdoctoral Scholarship →</a>. Here I got interested in the intersections of clinical radiology, global health, and open hardware. Now I am back <a href="https://www.kth.se/profile/kiansd?l=en" target="_blank">at KTH →</a> in Stockholm, focusing on democratizing X-ray technologies to adress global health challenges <br><br>
-                    
+                     
                     You can find my <a href="https://docs.google.com/viewer?url=https://docs.google.com/document/d/17dNtor6kJRgb_J3uOZOfbR4CvDzbdEcJyZf_BMpM_5s/export?format=pdf" 
    target="_blank">CV here →</a> and publications on <a href="https://scholar.google.com/citations?user=Kihb5S0AAAAJ&hl=en&oi=ao" target="_blank">Google Scholar →</a><br><br>
 
@@ -638,22 +648,23 @@
                         </a>
                     </li>
                     <li>
-                        <div class="project-item">
-                            <svg class="project-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Camera body -->
-                                <rect x="3" y="8" width="18" height="12" rx="2" ry="2" fill="rgba(136, 136, 136, .3)" stroke="var(--main-color-gray)" stroke-width="1.5"/>
-                                <!-- Camera lens -->
-                                <circle cx="12" cy="14" r="4" fill="none" stroke="var(--main-color-gray)" stroke-width="1.5"/>
-                                <circle cx="12" cy="14" r="2" fill="rgba(136, 136, 136, .3)"/>
-                                <!-- Flash/viewfinder -->
-                                <rect x="8" y="4" width="4" height="4" rx="1" ry="1" fill="rgba(136, 136, 136, .3)" stroke="var(--main-color-gray)" stroke-width="1.5"/>
-                                <!-- Small indicator light -->
-                                <circle cx="17" cy="10" r="1" fill="var(--main-color-gray)"/>
+                        <a href="https://www.openradiography.org" class="project-link blue-project">
+                            <svg class="project-icon" viewBox="0 0 340 359.08" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="o" x1="-18.48" y1="179.54" x2="281.52" y2="179.54" gradientTransform="translate(301.52) rotate(-180) scale(1 -1)" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0" stop-color="#fff"/>
+                                        <stop offset=".13" stop-color="#e8f1f8"/>
+                                        <stop offset=".41" stop-color="#adcde6"/>
+                                        <stop offset=".8" stop-color="#4f94cb"/>
+                                        <stop offset="1" stop-color="#1c75bc"/>
+                                    </linearGradient>
+                                </defs>
+                                <path fill="url(#o)" fill-opacity=".3" stroke="#1c75bc" stroke-width="20" d="M20,329.54c100-40,200-80,300-120,0-20,0-40,0-60C220,109.54,120,69.54,20,29.54v300Z"/>
                             </svg>
                             <div class="project-content">
-                                <span class="upcoming"> OpenRadiography - Upcoming</span>
+                                OpenRadiography → <i>Coming soon</i>
                             </div>
-                        </div>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -716,10 +727,8 @@
             atom.className = 'interaction-atom';
             atom.innerHTML = `
                 <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Nucleus -->
                     <circle cx="30" cy="30" r="4" fill="#39b54a" opacity="0.9"/>
                     
-                    <!-- Electron orbitals (larger and more visible) -->
                     <ellipse cx="30" cy="30" rx="20" ry="10" 
                              fill="none" stroke="#39b54a" stroke-width="1.5" opacity="0.7"/>
                     <ellipse cx="30" cy="30" rx="10" ry="20" 
@@ -728,7 +737,6 @@
                              fill="none" stroke="#39b54a" stroke-width="1" opacity="0.5"
                              transform="rotate(45 30 30)"/>
                     
-                    <!-- Electrons (larger and more visible) -->
                     <circle cx="50" cy="30" r="2" fill="#39b54a" class="electron-1"/>
                     <circle cx="30" cy="10" r="2" fill="#39b54a" class="electron-2"/>
                     <circle cx="15" cy="45" r="2" fill="#39b54a" class="electron-3"/>
